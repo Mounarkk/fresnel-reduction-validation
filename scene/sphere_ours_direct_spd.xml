@@ -1,0 +1,49 @@
+<scene version="3.0.0">
+
+    <!-- Spectral illuminant SPD, overridable: mi.load_file(..., illum="illum_fl1.spd") -->
+    <default name="illum" value="illum_d65.spd"/>
+
+    <!-- Custom Python integrator: applies the reduced 3x3 Fresnel matrix
+         M_F = sum_i b_i(cosT) * Phi_i to the real transported radiance.
+         Registered in render_ours_direct.py before load_file. -->
+    <integrator type="reduced_direct"/>
+
+    <!-- Camera: identical to scene/sphere.xml so the render is comparable -->
+    <sensor type="perspective">
+        <float name="fov" value="16"/>
+        <string name="fov_axis" value="x"/>
+        <transform name="to_world">
+            <lookat origin="-7.5, 1, 0" target="0, 1, 0" up="0, 1, 0"/>
+        </transform>
+        <sampler type="independent">
+            <integer name="sample_count" value="2048"/>
+        </sampler>
+        <film type="hdrfilm">
+            <integer name="width"  value="1024"/>
+            <integer name="height" value="1024"/>
+            <rfilter type="gaussian"/>
+        </film>
+    </sensor>
+
+    <!-- Environment map (the actual illuminant — NOT baked as D65) -->
+    <emitter type="constant">
+        <spectrum name="radiance" filename="$illum"/>
+        
+    </emitter>
+
+    <!-- Gold sphere. The BSDF is a *dummy* roughconductor (eta=0, k=1e5 -> F~1),
+         serving ONLY as the achromatic GGX geometry + VNDF sampler engine.
+         All colour comes from the integrator's M_F matrix. -->
+    <shape type="sphere">
+        <transform name="to_world">
+            <translate y="1"/>
+        </transform>
+        <bsdf type="roughconductor">
+            <string name="distribution" value="ggx"/>
+            <float name="alpha" value="0.05"/>
+            <rgb name="eta" value="0.0, 0.0, 0.0"/>
+            <rgb name="k"   value="100000.0, 100000.0, 100000.0"/>
+        </bsdf>
+    </shape>
+
+</scene>

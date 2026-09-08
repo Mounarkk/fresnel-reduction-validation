@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Regenerable heavy artefacts (make illuminants / make render)
+scene/uffizi_gray.exr
+results/*.exr
+
+# LaTeX build artefacts (doc/main.pdf is kept)
+doc/*.aux
+doc/*.log
+doc/*.out
+doc/*.toc
+doc/*.fls
+doc/*.fdb_latexmk
+doc/*.synctex.gz

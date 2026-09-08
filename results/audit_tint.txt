@@ -1,0 +1,78 @@
+
+═══ illuminant E(flat) — ΔE00 vs exact spectral ═══
+cosT:         1.000   0.707   0.500   0.259   0.120     mean
+[A] dual basis (ours)      6.599   6.497   6.192   5.044   3.251    5.516
+[B] D65-weighted dual      6.646   6.538   6.218   5.029   3.207    5.528
+[C] daylight S0S1S2        0.645   0.642   0.630   0.565   0.407    0.578
+[D] anchored D65/FL1/A     4.337   4.301   4.191   3.672   2.567    3.813
+[A4] 4-basis M_F           6.599   6.535   6.230   4.851   3.251    5.493
+[E] diag flat              0.000   0.000   0.000   0.000   0.000    0.000
+[F] diag Ward@E            0.000   0.000   0.000   0.000   0.000    0.000
+[G] Belcour-RGB            1.685   1.687   1.741   1.631   0.783    1.505
+
+═══ illuminant D65 — ΔE00 vs exact spectral ═══
+cosT:         1.000   0.707   0.500   0.259   0.120     mean
+[A] dual basis (ours)      8.414   8.279   7.852   6.241   4.201    6.997
+[B] D65-weighted dual      8.284   8.147   7.714   6.097   4.075    6.864
+[C] daylight S0S1S2        0.000   0.000   0.000   0.000   0.000    0.000
+[D] anchored D65/FL1/A     0.000   0.000   0.000   0.000   0.000    0.000
+[A4] 4-basis M_F           8.414   8.332   7.900   5.989   4.201    6.967
+[E] diag flat              1.381   1.369   1.334   1.198   0.937    1.244
+[F] diag Ward@E            0.000   0.000   0.000   0.000   0.000    0.000
+[G] Belcour-RGB            2.116   1.987   1.753   1.272   0.616    1.549
+
+═══ illuminant FL1 — ΔE00 vs exact spectral ═══
+cosT:         1.000   0.707   0.500   0.259   0.120     mean
+[A] dual basis (ours)      2.177   2.116   1.943   1.405   0.800    1.688
+[B] D65-weighted dual      2.028   1.966   1.793   1.267   0.700    1.551
+[C] daylight S0S1S2        5.915   5.826   5.513   4.232   2.495    4.796
+[D] anchored D65/FL1/A     0.000   0.000   0.000   0.000   0.000    0.000
+[A4] 4-basis M_F           2.177   2.173   1.991   1.162   0.800    1.661
+[E] diag flat              6.410   6.329   6.041   4.782   2.906    5.294
+[F] diag Ward@E            0.000   0.000   0.000   0.000   0.000    0.000
+[G] Belcour-RGB            5.131   4.859   4.240   2.989   2.120    3.868
+
+═══ cross-checks ═══
+render link @cosT=1, D65: exact sRGB  = [ 1.025   0.7223  0.3399]
+                          reduced sRGB= [ 0.961   0.7664  0.3287]
+                          (compare: reference_d65 px [1.0226 0.7199 0.3412], ours_direct_d65 px [0.9563 0.7626 0.3272])
+XYZ vs sRGB-folded single-bounce max abs diff: 5.55e-16  (must be ~0)
+metameric-black identity residual: 4.06e-16  (must be ~0)
+black energy fraction ||B||/||E||: 0.5524
+
+═══ generalization: mean ΔE00 over angles, per illuminant (incl. unseen) ═══
+method                    E(flat)        A      D50      D65      D75      FL1      FL2      FL4
+[A] dual basis (ours)       5.516    2.453    5.934    6.997    7.565    1.688    0.431    0.705
+[B] D65-weighted dual       5.528    2.643    5.967    6.864    7.343    1.551    0.308    0.515
+[C] daylight S0S1S2         0.578    0.328    0.000    0.000    0.000    4.796    5.423    3.611
+[D] anchored D65/FL1/A      3.813    0.000    5.038    0.000    4.687    0.000    0.849    3.227
+[H] PCA(10 illums)          7.309    0.054   10.080    0.499    9.835    4.365    3.881    3.232
+[E] diag flat               0.000    4.442    2.472    1.244    3.672    5.294    2.357    2.833
+[G] Belcour-RGB             1.505    4.715    3.858    1.549    2.610    3.868    1.331    2.625
+
+═══ two- and three-bounce error (cosT=0.7071 each bounce, ΔE00) ═══
+method                  illum     1-bounce 2-bounce 3-bounce
+[A] dual basis (ours)   D65          8.279    9.252    8.099
+[B] D65-weighted dual   D65          8.147    9.285    8.313
+[C] daylight S0S1S2     D65          0.000    1.141    1.922
+[D] anchored D65/FL1/A  D65          0.000    7.323   14.721
+[H] PCA(10 illums)      D65          0.588   15.907   49.293
+[F] diag Ward@E         D65          0.000    4.766    9.827
+[E] diag flat           D65          1.369    2.696    6.812
+[A] dual basis (ours)   FL1          2.116    2.152    1.465
+[B] D65-weighted dual   FL1          1.966    2.148    1.647
+[C] daylight S0S1S2     FL1          5.826    8.523    8.934
+[D] anchored D65/FL1/A  FL1          0.000   12.027   29.223
+[H] PCA(10 illums)      FL1          5.411   35.810   61.349
+[F] diag Ward@E         FL1          0.000    5.909   11.917
+[E] diag flat           FL1          6.329    3.980    3.897
+
+═══ Mallett & Yuksel 2019 sRGB primaries as reconstruction + conditioning ═══
+[A] dual basis (ours)      cond(S^T R-pre)=    1.00   |    5.516   2.453   5.934   6.997   7.565   1.688   0.431   0.705   (E(flat), A, D50, D65, D75, FL1, FL2, FL4)
+[C] daylight S0S1S2        cond(S^T R-pre)=    1.00   |    0.578   0.328   0.000   0.000   0.000   4.796   5.423   3.611   (E(flat), A, D50, D65, D75, FL1, FL2, FL4)
+[I] Mallett-Yuksel sRGB    cond(S^T R-pre)=    1.00   |    0.000   0.371   0.537   0.985   1.268   3.826   5.143   3.640   (E(flat), A, D50, D65, D75, FL1, FL2, FL4)
+[I] Mallett multi-bounce D65:    1.115   0.322   1.471
+[I] Mallett multi-bounce FL1:    4.688   7.604   8.423
+cond(R) [C] daylight S0S1S2       :       8.35
+cond(R) [D] anchored D65/FL1/A    :      49.67
+cond(R) [H] PCA(10 illums)        :     113.18

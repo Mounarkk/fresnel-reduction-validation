@@ -1,0 +1,45 @@
+<scene version="3.0.0">
+
+    <!-- Envmap file, overridable: mi.load_file(..., envfile="uffizi_gray.exr") -->
+    <default name="envfile" value="uffizi.hdr"/>
+
+    <!-- Direct integrator (matching the paper) -->
+    <integrator type="direct"/>
+
+    <!-- Camera: tight zoom from side, matching paper scene -->
+    <sensor type="perspective">
+        <float name="fov" value="16"/>
+        <string name="fov_axis" value="x"/>
+        <transform name="to_world">
+            <lookat origin="-7.5, 1, 0" target="0, 1, 0" up="0, 1, 0"/>
+        </transform>
+        <sampler type="independent">
+            <integer name="sample_count" value="2048"/>
+        </sampler>
+        <film type="hdrfilm">
+            <integer name="width"  value="1024"/>
+            <integer name="height" value="1024"/>
+            <rfilter type="gaussian"/>
+        </film>
+    </sensor>
+
+    <!-- Environment map -->
+    <emitter type="envmap">
+        <string name="filename" value="$envfile"/>
+        <float name="scale" value="1.0"/>
+    </emitter>
+
+    <!-- Gold sphere -->
+    <shape type="sphere">
+        <transform name="to_world">
+            <translate y="1"/>
+        </transform>
+        <bsdf type="ours">
+            <string name="distribution" value="ggx"/>
+            <float name="alpha" value="0.05"/>
+            <spectrum name="eta" filename="gold.eta.spd"/>
+            <spectrum name="k"   filename="gold.k.spd"/>
+        </bsdf>
+    </shape>
+
+</scene>
